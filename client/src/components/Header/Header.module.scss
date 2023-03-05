@@ -1,0 +1,106 @@
+.wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #c70841ee;
+  width: 100vw;
+  margin: 0;
+  z-index: 10;
+  padding: 0 1rem;
+  position: sticky;
+  top: 0;
+  margin-bottom: 20px;
+}
+.mainTitle {
+  display: block;
+  z-index: 10;
+}
+
+.navbar {
+  z-index: 1;
+  height: 50px;
+  display: flex;
+  align-items: center;
+}
+.menu {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+@media (max-width: 767px) {
+  .burgerButton {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+    position: relative;
+    cursor: pointer;
+    span {
+      position: absolute;
+      top: 9px;
+      width: 20px;
+      height: 2px;
+      background-color: black;
+    }
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      width: 20px;
+      height: 2px;
+      background-color: black;
+    }
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      width: 20px;
+      height: 2px;
+      background-color: black;
+    }
+  }
+  .menu {
+    opacity: 0;
+    display: flex;
+    padding-top: 20px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    width: 100%;
+    height: 100vh;
+    top: 50px;
+    left: 0;
+    right: 0;
+    background-color: #6b6e97ee;
+    overflow: hidden;
+    transition: all 0.3s ease-in;
+    z-index: 0;
+    li {
+      opacity: 0;
+      
+    }
+  }
+  .menuActive {
+    opacity: 100;
+    display: flex;
+    padding-top: 20px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    width: 100vw;
+    height: 80vh;
+    top: 50px;
+    left: 0;
+    right: 0;
+    background-color: #bbbbbbda;
+    overflow: hidden;
+    transition: all 0.3s ease-out;
+    z-index: -1;
+    li {
+     opacity: 100;
+      transition: all 5s ease-out;
+    }
+  }
+}
