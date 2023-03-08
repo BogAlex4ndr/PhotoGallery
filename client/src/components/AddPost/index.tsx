@@ -8,7 +8,7 @@ import Home from '../Home';
 const AddPost = () => {
   const [imageUrl, setImageUrl]: any = useState();
   const [isLoading, setIsLoading] = useState(false);
-  
+  const [fileName, setFileName]: any = useState();
 
   const inputFilleRef: any = useRef();
 
@@ -28,6 +28,7 @@ const AddPost = () => {
       formData.append('image', file);
       const { data } = await axios.post('/upload', formData);
       setImageUrl(data.url);
+      setFileName(file.name);
     } catch (error) {
       console.warn(error);
       alert('Error upload file');
@@ -38,13 +39,14 @@ const AddPost = () => {
     try {
       if (imageUrl === undefined) {
         return alert('add image');
-      }
-      setIsLoading(true);
-      const fields = {
-        imageUrl: `http://localhost:4444${imageUrl}`,
-      };
+      } else {
+        setIsLoading(true);
+        const fields = {
+          imageUrl: `http://localhost:4444${imageUrl}`,
+        };
 
-      const { data } = await axios.post('/posts', fields);
+        const { data } = await axios.post('/posts', fields);
+      }
     } catch (err) {
       console.warn(err);
       alert('error upload image');
@@ -53,6 +55,7 @@ const AddPost = () => {
 
   const removeImage = () => {
     setImageUrl('');
+    axios.post(`/delete-image`, { filename: fileName });
   };
   return (
     <div>
@@ -62,7 +65,7 @@ const AddPost = () => {
       <div>
         <input type='file' ref={inputFilleRef} onChange={handleChangeFile} hidden />
         <button onClick={() => inputFilleRef.current.click()}>upload image</button>
-        <button onClick={removeImage}>Delete image</button>
+        {imageUrl && <button onClick={removeImage}>Delete image</button>}
       </div>
       <div>
         <img style={{ maxWidth: '300px' }} src={`http://localhost:4444${imageUrl}`} alt='' />
