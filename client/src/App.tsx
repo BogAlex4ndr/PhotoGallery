@@ -8,8 +8,12 @@ import Post from './components/Post';
 import { Route, Routes } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import Home from './components/Home';
+import { useDispatch } from 'react-redux';
+import React from 'react';
+import { fechAuthMe } from './redux/slices/auth';
 
 function App() {
+  
   return (
     <div className='App'>
       <Header />

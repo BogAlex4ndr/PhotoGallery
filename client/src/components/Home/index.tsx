@@ -1,7 +1,5 @@
-
-
 import axios from '../../axios';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './Home.module.scss';
 import { useDispatch } from 'react-redux';
 import { fetchPosts } from '../../redux/slices/postSlice';
@@ -17,7 +15,7 @@ const Home = () => {
   const { posts } = useSelector((state: RootState) => state.posts);
 
   const isPostsLoading = posts.status === 'loading';
-  console.log(posts.items);
+  console.log('this is items length', posts.items.length);
   useEffect(() => {
     dispatch(fetchPosts());
   }, []);

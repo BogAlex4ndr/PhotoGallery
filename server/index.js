@@ -7,7 +7,6 @@ import * as PostController from './controllers/PostController.js';
 import multer from 'multer';
 import cors from 'cors';
 
-
 mongoose
   .connect(
     'mongodb+srv://jakasyak:5JEbkQfnQnnzAokB@cluster0.ozmz0gl.mongodb.net/blog?retryWrites=true&w=majority',
@@ -42,7 +41,7 @@ app.post('/auth/login', UserController.login);
 app.post('/auth/register', registerValidator, UserController.registration);
 app.get('/auth/me', checkAuth, UserController.getMe);
 
-app.post('/upload', upload.single('image'), (req, res) => {
+app.post('/upload', checkAuth, upload.single('image'), (req, res) => {
   res.json({
     url: `/uploads/${req.file.originalname}`,
   });
